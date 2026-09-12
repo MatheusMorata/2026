@@ -22,7 +22,7 @@ QueueHandle_t filaCompleta;
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "Inicializando Computador de Bordo - Ceres-1");
+    ESP_LOGI(TAG, "Inicializando Computador de Bordo");
 
     // Inicializa barramentos
     i2c_bus_init();
