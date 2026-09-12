@@ -12,6 +12,7 @@
 #include "gps_neo6m.h"
 
 extern QueueHandle_t filaTelemetria;
+extern QueueHandle_t filaEeprom;
 static const char *TAG = "TASK_SENS";
 
 #define MPU9250_ADDR             0x68
@@ -106,6 +107,11 @@ void task_sensores(void *pvParameters) {
 
         if (xQueueSend(filaTelemetria, &dados, pdMS_TO_TICKS(200)) != pdPASS) {
             ESP_LOGW(TAG, "Fila de telemetria cheia!");
+        }
+
+        if (xQueueSend(filaEeprom, &dados, 0) != pdPASS) {
+            // A EEPROM recebe best-effort para nao bloquear a aquisicao de sensores.
+            ESP_LOGD(TAG, "Fila de EEPROM cheia; amostra descartada");
         }
 
         vTaskDelay(pdMS_TO_TICKS(200)); // 5Hz

@@ -19,6 +19,7 @@ static const char *TAG = "OBC_MAIN";
 
 QueueHandle_t filaTelemetria;
 QueueHandle_t filaCompleta;
+QueueHandle_t filaEeprom;
 
 void app_main(void)
 {
@@ -35,8 +36,9 @@ void app_main(void)
     // Cria as filas
     filaTelemetria = xQueueCreate(10, sizeof(sensorsData_t));
     filaCompleta = xQueueCreate(3, sizeof(respost_t));
+    filaEeprom = xQueueCreate(12, sizeof(sensorsData_t));
 
-    if (filaTelemetria == NULL || filaCompleta == NULL) {
+    if (filaTelemetria == NULL || filaCompleta == NULL || filaEeprom == NULL) {
         ESP_LOGE(TAG, "Falha ao criar filas do FreeRTOS");
         return;
     }
