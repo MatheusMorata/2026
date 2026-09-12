@@ -1,4 +1,4 @@
-# Computador de Bordo Ceres-1 (Transmissor) - ESP-IDF
+# Computador de Bordo (Transmissor) - ESP-IDF
 
 Este projeto implementa o computador de bordo (mestre) com:
 
